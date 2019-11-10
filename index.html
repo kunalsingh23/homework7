@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drawing Area</title>
+<!-- You can add your style here rather than in an external style sheet. -->
+<style>
+	canvas {
+	    border:5px solid #d3d3d3;
+	    background-color: #f1f1f1;
+	    display: block;
+	}
+</style>
+</head>
+<body>
+    <!-- DO NOT MODIFY THIS HTML -->
+    <canvas id = "myCanvas" width = "350" height = "500"  ></canvas>
+    <input type = "color" id = "picker"/>
+</body>
+
+<script>
+	
+	var canvas = document.querySelector('#myCanvas');
+	canvas.width = window.innerWidth * .80;
+	canvas.height = window.innerHeight * .80;
+	
+	var ctx = canvas.getContext('2d');
+	var color = 'black';
+	var cursor = 'up';
+
+	function drawcircle(posX,posY){
+		ctx.beginPath();
+		ctx.fillStyle = color;
+		ctx.arc(posX,posY,10,0, 2*Math.PI);
+		ctx.fill();
+	}
+
+	myCanvas.addEventListener('mousemove',function(e){
+			console.log(e.x);
+			console.log(e.y);
+			posX = e.x;
+			posY = e.y;
+			if (cursor == 'up'){
+				drawcircle(posX,posY);
+		}})
+
+	window.addEventListener(
+		'keydown',function(e){
+			console.log(e);
+			if(event.which==66){
+				color = 'blue'
+			}
+			console.log('Color Switch: '+color)
+
+		})
+	window.addEventListener(
+		'keydown',function(e){
+			console.log(e);
+			if(event.which==71){
+				color = 'green'
+			}
+			console.log('Color Switch: '+color)
+
+		})
+
+	window.addEventListener(
+		'keydown',function(e){
+			console.log(e);
+			if(event.which==82){
+				color = 'red'
+			}
+			console.log('Color Switch: '+color)
+
+		})
+
+	window.addEventListener(
+		'keydown',function(e){
+			console.log(e);
+			if(event.which==89){
+				color = 'yellow'
+			}
+			console.log('Color Switch: '+color)
+
+		})
+
+	window.addEventListener(
+		'keydown', function(e){
+			console.log(e);
+			if(event.which==38){
+				cursor = 'down';
+			}
+			console.log('Cursor: '+cursor)
+			
+		})
+
+	window.addEventListener(
+		'keydown', function(e){
+			console.log(e);
+			if(event.which==40){
+				cursor = 'up';
+			}
+			console.log('Cursor: '+cursor)
+			
+		})
+
+	window.addEventListener(
+		'keydown', function(e){
+			console.log(e);
+			if(event.which==32){
+				ctx.clearRect(0,0,canvas.width,canvas.height);
+				ctx.restore();
+			}
+			console.log('Clear the Canvas')
+			
+		})
+
+	picker.onchange = function(){
+		color = picker.value;
+		
+		console.log('Color Switch: '+color)
+}
+
+</script>
+
+</html>
